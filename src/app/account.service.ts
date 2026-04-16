@@ -9,8 +9,7 @@ import { Withdraw } from './withdraw/withdraw';
 })
 export class AccountService {
 
-  private baseUrl = "http://localhost:8080/api/accounts";
-
+private baseUrl = "http://localhost:8080/api/accounts"; 
   constructor(private httpClient: HttpClient) {}
 
   getAllAccounts(): Observable<Account[]> {

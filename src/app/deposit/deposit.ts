@@ -7,62 +7,60 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-deposit',
-  standalone: true,   // ✅ VERY IMPORTANT
-  imports: [CommonModule, FormsModule],   // ✅ REQUIRED
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './deposit.html',
-  styleUrls: ['./deposit.css'],   // ✅ FIXED (plural)
 })
 export class Deposit {
 
-  id:number=0;
+  id: number = 0;
   account: Account = new Account();
 
-  constructor(private accountService:AccountService,private rout:ActivatedRoute,private router:Router){
+  successMessage = "";
+  errorMessage = "";
 
-  }
+  constructor(
+    private accountService: AccountService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
-  ngOnInit(){
+  ngOnInit() {
+    this.id = this.route.snapshot.params['id'];
 
-    this.id= this.rout.snapshot.params['id'];
     this.accountService.getAccountById(this.id).subscribe(data => {
-
-      this.account=data;
-    })
+      this.account = data;
+    });
   }
-
-  successMessage="";
-  errorMessage="";
 
   onSubmit() {
-     
-    if(this.isValidAmount(this.account.balance)) {
-    this.accountService.deposit(this.id,this.account.balance).subscribe(data => {
 
-      this.account= data; // this is updated data that has been added with previous balance and the amount that has been deposited.
-      this.successMessage= "Deposit SuccessFully... "
+    this.successMessage = "";
+    this.errorMessage = "";
+
+    if (this.isValidAmount(this.account.balance)) {
+
+      this.accountService.deposit(this.id, this.account.balance).subscribe(data => {
+
+        this.account = data;
+
+        this.successMessage = "Deposit Successful!";
+
+        setTimeout(() => {
+          this.router.navigate(['/accounts']);
+        }, 1200);
+      });
+
+    } else {
+      this.errorMessage = "Enter a valid amount (1 - 1 Cr)";
 
       setTimeout(() => {
-      this.router.navigate(['/accounts'])
-
-      },1000)
-      
-      
-    })
-  } else {
-
-
-     setTimeout(() => {
-       this.errorMessage = ""
-
-     },1000)
+        this.errorMessage = "";
+      }, 1500);
+    }
   }
 
- 
-
-}
-
- isValidAmount(amount:number):boolean{
-    return amount > 0 && amount < 10000000
+  isValidAmount(amount: number): boolean {
+    return amount > 0 && amount < 10000000;
   }
-
 }

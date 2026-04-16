@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';9
 import { Observable } from 'rxjs';
 
 
@@ -6,12 +6,17 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class Account {
+  id!: number;
 
-     id!: number;
-     accountHolderName!: string;
-     balance!: number;
+  firstName!: string;
+  middleName!: string;
+  lastName!: string;
 
-private baseUrl = "http://localhost:8080/api/accounts"
+  email!: string;
+  accountNumber!: string;
 
+  balance!: number;
 
+  phoneNumber!: string;
+  address!: string;
 }

@@ -1,27 +1,95 @@
-<div *ngIf="accountCreate" class="alert alert-success">
-  Account Created Successfully!
+<div class="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+
+  <div class="bg-white shadow-xl rounded-2xl p-8 w-full max-w-2xl">
+
+    <!-- Title -->
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">
+      Create Account
+    </h2>
+
+    <!-- Success -->
+    <div *ngIf="accountCreate"
+      class="mb-4 p-3 rounded-lg bg-green-100 text-green-700 text-center font-medium">
+      Account Created Successfully!
+    </div>
+
+    <!-- Form -->
+    <form (ngSubmit)="onSubmit()" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+      <!-- First Name -->
+      <div>
+        <label class="label">First Name</label>
+        <input type="text" [(ngModel)]="account.firstName" name="firstName"
+          class="input" required />
+      </div>
+
+      <!-- Middle Name -->
+      <div>
+        <label class="label">Middle Name</label>
+        <input type="text" [(ngModel)]="account.middleName" name="middleName"
+          class="input" />
+      </div>
+
+      <!-- Last Name -->
+      <div>
+        <label class="label">Last Name</label>
+        <input type="text" [(ngModel)]="account.lastName" name="lastName"
+          class="input" required />
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label class="label">Email</label>
+        <input type="email" [(ngModel)]="account.email" name="email"
+          class="input" required />
+      </div>
+
+      <!-- Phone -->
+      <div>
+        <label class="label">Phone Number</label>
+        <input type="text" [(ngModel)]="account.phoneNumber" name="phoneNumber"
+          class="input" required />
+      </div>
+
+      <!-- Account Number -->
+      <div>
+        <label class="label">Account Number</label>
+        <input type="text" [(ngModel)]="account.accountNumber" name="accountNumber"
+          class="input" required />
+      </div>
+
+      <!-- Balance -->
+      <div>
+        <label class="label">Balance</label>
+        <input type="number" [(ngModel)]="account.balance" name="balance"
+          class="input" required />
+      </div>
+
+      <!-- Address (full width) -->
+      <div class="md:col-span-2">
+        <label class="label">Address</label>
+        <textarea [(ngModel)]="account.address" name="address"
+          class="input" rows="3" required></textarea>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="md:col-span-2">
+        <button type="submit"
+          class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition">
+          Create Account
+        </button>
+      </div>
+
+    </form>
+  </div>
 </div>
 
-<form (ngSubmit)="onSubmit()">
-
-  <div class="form-group">
-    <label>Account Holder Name</label>
-    <input type="text" class="form-control"
-      [(ngModel)]="account.accountHolderName"
-      name="name"
-      required>
-  </div>
-
-  <div class="form-group">
-    <label>Balance</label>
-    <input type="number" class="form-control"
-      [(ngModel)]="account.balance"
-      name="balance"
-      required>
-  </div>
-
-  <button class="btn btn-success mt-2" type="submit">
-    Submit
-  </button>
-
-</form>
+<!-- Reusable styles -->
+<style>
+.label {
+  @apply block text-sm font-semibold text-gray-600 mb-1;
+}
+.input {
+  @apply w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none;
+}
+</style>
