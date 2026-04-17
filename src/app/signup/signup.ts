@@ -11,14 +11,22 @@ import { CommonModule } from '@angular/common';
 })
 export class Signup {
 
-  name: string = '';
+  firstName: string = '';
+  lastName: string = '';
   email: string = '';
   password: string = '';
+  phone: string = '';
 
   constructor(private router: Router) {}
 
   onSignup() {
-    console.log(this.name, this.email, this.password);
+    console.log(
+      this.firstName,
+      this.lastName,
+      this.email,
+      this.password,
+      this.phone
+    );
 
     // redirect after signup
     this.router.navigate(['/login']);

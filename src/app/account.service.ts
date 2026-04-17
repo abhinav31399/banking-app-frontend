@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { Account } from './account';
 import { Withdraw } from './withdraw/withdraw';
 
+
+
 @Injectable({
   providedIn: 'root',
 })
@@ -17,7 +19,6 @@ private baseUrl = "http://localhost:8080/api/accounts";
   }
 
   createAccount(account:Account):Observable<Account> {
-
    return  this.httpClient.post<Account>(`${this.baseUrl}`,account)
   }
 
